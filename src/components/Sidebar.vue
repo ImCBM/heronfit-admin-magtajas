@@ -18,7 +18,7 @@ const navigation = [
   { name: 'User Management', path: '/dashboard/users', icon: Users },
   { name: 'Session Management', path: '/dashboard/sessions', icon: Timer },
   { name: 'Announcements', path: '/dashboard/announcements', icon: Megaphone },
-  { name: 'Analytics', path: '/dashboard/analytics', icon: BarChart3 }
+  { name: 'Data Reports', path: '/dashboard/analytics', icon: BarChart3 }
 ]
 
 const handleLogout = () => {

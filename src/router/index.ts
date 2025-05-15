@@ -52,7 +52,7 @@ const router = createRouter({
         },
         {
           path: 'analytics',
-          name: 'analytics',
+          name: 'data-reports',
           component: () => import('../views/Analytics.vue')
         }
       ]

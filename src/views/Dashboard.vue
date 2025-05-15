@@ -239,8 +239,8 @@ onUnmounted(() => {
         </div>
       </Card>
 
-      <!-- Analytics Preview -->
-      <Card title="Analytics Preview">
+      <!-- Data Reports Preview -->
+      <Card title="Data Reports Preview">
         <div class="space-y-4">
           <div>
             <h4 class="font-medium text-text">Peak Hours</h4>
@@ -254,7 +254,7 @@ onUnmounted(() => {
             @click="navigateTo('analytics')"
             class="text-primary hover:text-primary-dark"
           >
-            View Analytics →
+            View Data Reports →
           </button>
         </div>
       </Card>

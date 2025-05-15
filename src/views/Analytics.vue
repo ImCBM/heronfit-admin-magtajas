@@ -109,7 +109,7 @@ onUnmounted(() => {
 
 <template>
   <div class="p-6">
-    <h1 class="text-2xl font-bold mb-6">Analytics</h1>
+    <h1 class="text-2xl font-bold mb-6">Data Reports</h1>
     
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <!-- Charts Section -->
