@@ -50,12 +50,13 @@ const stats = [
   }
 ]
 
+const currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
 const sessions = [
-  { date: 'Tuesday - October 8, 2024', time: '8:00 am - 10:00 am', capacity: '10/15 spots left' },
-  { date: 'Tuesday - October 8, 2024', time: '8:00 am - 10:00 am', capacity: '12/15 spots left' },
-  { date: 'Tuesday - October 8, 2024', time: '8:00 am - 10:00 am', capacity: '8/15 spots left' },
-  { date: 'Tuesday - October 8, 2024', time: '8:00 am - 10:00 am', capacity: '13/15 spots left' }
+  { date: currentDate, time: '8:00 am - 10:00 am', capacity: '10/15 spots left' },
+  { date: currentDate, time: '8:00 am - 10:00 am', capacity: '12/15 spots left' },
+  { date: currentDate, time: '8:00 am - 10:00 am', capacity: '8/15 spots left' },
+  { date: currentDate, time: '8:00 am - 10:00 am', capacity: '13/15 spots left' }
 ]
 
 const bookings = [

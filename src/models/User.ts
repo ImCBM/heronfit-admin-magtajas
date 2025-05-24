@@ -13,7 +13,7 @@ export interface User {
   gender: string | null
   weight: string | null
   height: string | null
-  fitness_goal: string | null
+  goal: string | null
   phone: string | null
   has_session: boolean | null
   last_activity: string | null

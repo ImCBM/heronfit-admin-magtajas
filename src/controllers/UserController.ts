@@ -210,4 +210,21 @@ export class UserController {
       return 0
     })
   }
+
+  /**
+   * Creates a new user
+   * @param userData User data to create
+   * @returns Promise<User | null> Created user data or null if failed
+   */
+  static async createUser(userData: Partial<User>): Promise<User | null> {
+    try {
+      const newUser = await UserModel.createUser(userData)
+      await this.fetchUsers() // Refresh the users list
+      this.applyFiltersAndSorting()
+      return newUser
+    } catch (error) {
+      console.error('Error creating user:', error)
+      return null
+    }
+  }
 } 

@@ -14,6 +14,8 @@ import Tabs from '../components/ui/Tabs.vue'
 import TabPanel from '../components/ui/TabPanel.vue'
 import Table from '../components/ui/Table.vue'
 import Dropdown from '../components/ui/Dropdown.vue'
+import Modal from '../components/ui/Modal.vue'
+import NewUserForm from '../components/forms/NewUserForm.vue'
 import { User } from '../models/User'
 import { UserController } from '../controllers/UserController'
 
@@ -28,6 +30,8 @@ const deletingUser = ref(false)
 const searchQuery = ref('')
 const sortField = ref('created_at')
 const sortDirection = ref<'asc' | 'desc'>('desc')
+const showNewUserModal = ref(false)
+const creatingUser = ref(false)
 
 // Computed properties for form fields
 const firstName = computed({
@@ -166,6 +170,21 @@ const handleSearch = (event: Event) => {
   UserController.searchUsers(query, updateUsers)
 }
 
+const handleCreateUser = async (userData: Partial<User>) => {
+  creatingUser.value = true
+  try {
+    const newUser = await UserController.createUser(userData)
+    if (newUser) {
+      showNewUserModal.value = false
+      await UserController.fetchUsers()
+    }
+  } catch (error) {
+    console.error('Error creating user:', error)
+  } finally {
+    creatingUser.value = false
+  }
+}
+
 // Apply sorting whenever sort field or direction changes
 watch([sortField, sortDirection], () => {
   UserController.setSortOptions({ field: sortField.value, direction: sortDirection.value })
@@ -187,7 +206,10 @@ onUnmounted(() => {
     <div v-if="!showDetails">
       <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-bold text-primary">User Management</h1>
-        <button class="bg-primary text-text-white px-4 py-2 rounded-md hover:bg-primary-dark">
+        <button 
+          @click="showNewUserModal = true"
+          class="bg-primary text-text-white px-4 py-2 rounded-md hover:bg-primary-dark"
+        >
           Add New User
         </button>
       </div>
@@ -304,7 +326,7 @@ onUnmounted(() => {
                 <p class="text-sm text-text-light">User ID: {{ selectedUser?.id }}</p>
                 <p class="text-sm text-text-light">Registration Date: {{ selectedUser?.created_at }}</p>
                 <p class="text-sm text-text-light">Gender: {{ selectedUser?.gender }}</p>
-                <p class="text-sm text-text-light">Fitness Goal: {{ selectedUser?.fitness_goal }}</p>
+                <p class="text-sm text-text-light">Fitness Goal: {{ selectedUser?.goal }}</p>
                 <p class="text-sm text-text-light">Height: {{ selectedUser?.height }}cm</p>
                 <p class="text-sm text-text-light">Weight: {{ selectedUser?.weight }}kg</p>
               </div>
@@ -356,5 +378,17 @@ onUnmounted(() => {
         </TabPanel>
       </Tabs>
     </div>
+
+    <!-- New User Modal -->
+    <Modal
+      :is-open="showNewUserModal"
+      title="Create New User"
+      @close="showNewUserModal = false"
+    >
+      <NewUserForm
+        @submit="handleCreateUser"
+        @cancel="showNewUserModal = false"
+      />
+    </Modal>
   </div>
 </template>
